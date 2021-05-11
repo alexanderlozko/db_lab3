@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+  <!-- Кодировка веб-страницы -->
+  <meta charset="utf-8">
+  <!-- Настройка viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Lab3</title>
+
+  <!-- Bootstrap CSS (jsDelivr CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+  <!-- Bootstrap Bundle JS (jsDelivr CDN) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="container">
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">Lab3</span>
+        </div>
+    </nav>
+    <hr>
+    <div class="alert alert-info" role="alert">
+        {% if message %}
+            {{ message }}
+        {% endif %}
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h1>add brand</h1>
+                    <form action="{{ url_for('index') }}" method="post">
+                        <p>
+                            <label>brand</label>
+                            <input type="text" name="name_brand">
+                        </p>
+                        <p>
+                            <label>year of creation</label>
+                            <input type="text" name="year_brand">
+                        </p>
+                        <p>
+                            <input type="submit">
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                     {% for post in brand_posts %}
+                        <p>
+                            <strong>Brand:</strong><em>{{ post.name }}</em>
+                            <strong>Year of foundation:</strong><em>{{ post.year }}</em>
+                            <a href='/delete_brand/{{post.name}}'><button ctype="button" class="btn btn-primary">delete</button></a>
+                        </p>
+                     {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h1>add product</h1>
+                    <form action="{{ url_for('index') }}" method="post">
+                        <p>
+                            <label>product</label>
+                            <input type="text" name="name_product">
+                        </p>
+                        <p>
+                            <label>price</label>
+                            <input type="text" name="price_product">
+                        </p>
+                        <p>
+                            <label>brand</label>
+                            <input type="text" name="brand_product">
+                        </p>
+                        <p>
+                            <input type="submit">
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                     {% for post in product_posts %}
+                        <p>
+                            <strong>ID:</strong><em>{{ post.id }}</em>
+                            <strong>Product:</strong><em>{{ post.name }}</em>
+                            <strong>Price:</strong><em>{{ post.price }}</em>
+                            <strong>Brand:</strong><em>{{ post.brand }}</em>
+                            <a href='/delete_product/{{post.id}}'><button ctype="button" class="btn btn-primary">delete</button></a>
+                        </p>
+                     {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
